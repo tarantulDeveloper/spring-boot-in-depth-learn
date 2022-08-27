@@ -1,0 +1,79 @@
+server:
+  port: 5050
+  ssl:
+    enabled: true
+    key-alias: ssl-alias
+    key-store: classpath:ssl-key.p12
+    key-store-type: PKCS12
+    key-password: 123456
+    key-store-password: 123456
+
+spring:
+  profiles:
+    active: dev
+---
+spring:
+#  h2:
+#    console.enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:employee
+#    driverClassName: org.h2.Driver
+#    username: tornado
+#    password: tornado
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/employeesDB
+    username: root
+    password: admin
+  config:
+    activate:
+      on-profile: dev
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env, beans"
+
+welcome:
+  message: Welcome to this webpage!!!
+---
+
+---
+spring:
+  #  h2:
+  #    console.enabled: true
+  #  datasource:
+  #    url: jdbc:h2:mem:employee
+  #    driverClassName: org.h2.Driver
+  #    username: tornado
+  #    password: tornado
+  #  jpa:
+  #    database-platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/employeesDB-prod
+    username: root
+    password: admin
+  config:
+    activate:
+      on-profile: prod
+
+welcome:
+  message: Welcome to this webpage!!!
+---
+
+
